@@ -12,6 +12,12 @@
 .flexTable , .flexTable td{
 	border: 1px solid #333333;
 }
+.cellTable {
+	border: 1px solid #333333;
+}
+tr:nth-child(2n) {
+	background: #D0E4F6;
+}
 .invisible {
 	position: absolute;
 	width: 0;
@@ -28,9 +34,9 @@
 .gwt-table-to-excel-exportWidget {
 	border: 1px solid #333333;
 	cursor: pointer;
-	background : #016300 url(../image/logo_excel.gif) top left no-repeat;
+	background: #016300 url(../image/logo_excel.gif) top left no-repeat;
 	height: 20px;
-	padding:0 4px 0 20px;
+	padding: 0 4px 0 20px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
