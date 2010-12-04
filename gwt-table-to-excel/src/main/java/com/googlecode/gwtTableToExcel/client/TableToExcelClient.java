@@ -4,6 +4,8 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.user.cellview.client.CellTable;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.HTMLTable;
@@ -31,12 +33,31 @@ public class TableToExcelClient {
 	}
 	
 	/**
+	 * Simple Constructor
+	 * @param table
+	 */
+	@SuppressWarnings("rawtypes")
+	public TableToExcelClient(final CellTable table) {
+		this(table.getElement(),new Label("Export"),"export");
+	}
+	
+	/**
 	 * Constructor with defined label text
 	 * @param table
 	 * @param labelText
 	 */
 	public TableToExcelClient(final HTMLTable table, String labelText) {
-		this(table,new Label(labelText),"export");
+		this(table.getElement(),new Label(labelText),"export");
+	}
+	
+	/**
+	 * Constructor with defined label text
+	 * @param table
+	 * @param labelText
+	 */
+	@SuppressWarnings("rawtypes")
+	public TableToExcelClient(final CellTable table, String labelText) {
+		this(table.getElement(),new Label(labelText),"export");
 	}
 	
 	/**
@@ -46,7 +67,18 @@ public class TableToExcelClient {
 	 * @param fileName
 	 */
 	public TableToExcelClient(final HTMLTable table, String labelText, String fileName) {
-		this(table,new Label(labelText),fileName);
+		this(table.getElement(),new Label(labelText),fileName);
+	}
+	
+	/**
+	 * Constructor with defined label text and fileName
+	 * @param table
+	 * @param labelText
+	 * @param fileName
+	 */
+	@SuppressWarnings("rawtypes")
+	public TableToExcelClient(final CellTable table, String labelText, String fileName) {
+		this(table.getElement(),new Label(labelText),fileName);
 	}
 	
 	/**
@@ -55,7 +87,17 @@ public class TableToExcelClient {
 	 * @param exportWidget
 	 */
 	public TableToExcelClient(final HTMLTable table, HasClickHandlers exportWidget) {
-		this(table,(Widget)exportWidget,"export");
+		this(table.getElement(),(Widget)exportWidget,"export");
+	}
+	
+	/**
+	 * Constructor with other widget (ex button)
+	 * @param table
+	 * @param exportWidget
+	 */
+	@SuppressWarnings("rawtypes")
+	public TableToExcelClient(final CellTable table, HasClickHandlers exportWidget) {
+		this(table.getElement(),(Widget)exportWidget,"export");
 	}
 	
 	/**
@@ -64,7 +106,22 @@ public class TableToExcelClient {
 	 * @param labelText
 	 * @param fileName
 	 */
-	public TableToExcelClient(final HTMLTable table, Widget exportWidget, String fileName) {
+	public TableToExcelClient(HTMLTable table, Widget exportWidget, String fileName) {
+		this(table.getElement(), exportWidget, fileName);
+	}
+	
+	/**
+	 * Constructor with ful options
+	 * @param table
+	 * @param labelText
+	 * @param fileName
+	 */
+	@SuppressWarnings("rawtypes")
+	public TableToExcelClient(CellTable table, Widget exportWidget, String fileName) {
+		this(table.getElement(), exportWidget, fileName);
+	}
+
+	private TableToExcelClient(final Element tableElement, Widget exportWidget, String fileName) {
 		formPanel.setAction(GWT.getModuleBaseURL()+"excel");
 //		formPanel.setEncoding(FormPanel.ENCODING_MULTIPART);
 		formPanel.setMethod(FormPanel.METHOD_POST);
@@ -81,7 +138,7 @@ public class TableToExcelClient {
 		((HasClickHandlers)exportWidget).addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				//lazy copy
-				contentHidden.setValue(table.getElement().getString());
+				contentHidden.setValue(tableElement.getString());
 				formPanel.submit();
 			}
 		});

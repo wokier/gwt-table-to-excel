@@ -6,12 +6,16 @@ import java.util.List;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.user.cellview.client.CellTable;
+import com.google.gwt.user.cellview.client.TextColumn;
+import com.google.gwt.user.cellview.client.TextHeader;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DecoratorPanel;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.googlecode.gwtTableToExcel.client.TableToExcelClient;
@@ -41,8 +45,7 @@ public class Gwt_table_to_excel_demo implements EntryPoint {
 		
 		buildFlexTableWithButtonExample();
 		
-		
-		
+		buildCellTableExample();
 		
 	}
 
@@ -63,6 +66,7 @@ public class Gwt_table_to_excel_demo implements EntryPoint {
 		TableToExcelClient tableToExcelClient = new TableToExcelClient(flexTable);
 		RootPanel.get("content").add(decoratorPanel);
 		RootPanel.get("content").add(tableToExcelClient.build());
+		RootPanel.get("content").add(new HTML("<br />"));
 	}
 
 	private void fillaTableWithSentences(FlexTable flexTable,
@@ -91,5 +95,32 @@ public class Gwt_table_to_excel_demo implements EntryPoint {
 		flexTable.setWidget(3, 9, tableToExcelClient.build());
 		
 		RootPanel.get("content").add(decoratorPanel);
+		RootPanel.get("content").add(new HTML("<br />"));
 	}
+	
+	
+	private void buildCellTableExample() {
+		CellTable<String> cellTable = new CellTable<String>();
+		cellTable.addStyleName("cellTable");
+		cellTable.addColumn(new TextColumn<String>(){
+			@Override
+			public String getValue(String object) {
+				return object;
+			}
+		},new TextHeader("Cool"));
+		List<String> sentences = Arrays.asList("It also works with the Cell Table","Relly, that works !", "Without any server-side rewrite" 
+				);
+		cellTable.setRowData(0,sentences);
+		
+		DecoratorPanel decoratorPanel = new DecoratorPanel();
+		decoratorPanel.add(cellTable);
+		
+		TableToExcelClient tableToExcelClient = new TableToExcelClient(cellTable);
+		RootPanel.get("content").add(decoratorPanel);
+		RootPanel.get("content").add(tableToExcelClient.build());
+	}
+	
+	
+	
+	
 }
