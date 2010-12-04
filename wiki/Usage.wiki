@@ -1,0 +1,22 @@
+#summary gwt-table-to-excel Usage
+
+== Add the library == 
+add gwt-table-to-excel-[version].jar
+
+== Add the module ==
+define in your .gwt.xml
+{{{
+<inherits name="com.googlecode.gwtTableToExcel.gwtTableToExcel" />
+}}}
+
+== Custom the style ==
+You can define style for the following classes :
+{{{
+.gwt-table-to-excel-form {
+}
+.gwt-table-to-excel-panel {
+}
+.gwt-table-to-excel-label {
+}
+}}}
+For exemple, it could be nice to put an excel icon in the export widget.
