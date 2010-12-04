@@ -1,4 +1,15 @@
-table, table td{
+#container {
+	color: #333333;	
+}
+#header {
+	text-align :center;	
+}
+#footer {
+	position: absolute;
+	right: 0;
+	bottom : 0;
+}
+.flexTable , .flexTable td{
 	border: 1px solid #333333;
 }
 .invisible {
@@ -7,7 +18,22 @@ table, table td{
 	height: 0;
 	border: 0;
 }
-
 .red {
 	background: red;
+}
+.gwt-table-to-excel-form, .gwt-table-to-excel-panel {
+	margin: 0;
+	padding : 0;
+}
+.gwt-table-to-excel-exportWidget {
+	border: 1px solid #333333;
+	cursor: pointer;
+	background : #016300 url(../image/logo_excel.gif) top left no-repeat;
+	height: 20px;
+	padding:0 4px 0 20px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	min-width : 40px;
+	max-width : 50px;
 }
