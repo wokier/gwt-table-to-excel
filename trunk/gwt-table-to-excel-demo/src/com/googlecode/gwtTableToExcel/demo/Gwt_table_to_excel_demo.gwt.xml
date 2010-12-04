@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to="gtte">
+	<inherits name="com.google.gwt.user.User" />
+	<inherits name="com.google.gwt.user.theme.standard.Standard" />
+	<inherits name="com.google.gwt.user.theme.standard.StandardResources" />
+	<inherits name="com.google.gwt.junit.JUnit" />
+
+	<inherits name="com.googlecode.gwtTableToExcel.gwtTableToExcel" />
+
+	<entry-point
+		class="com.googlecode.gwtTableToExcel.demo.client.Gwt_table_to_excel_demo" />
+
+	<source path="client" />
+
+</module>
