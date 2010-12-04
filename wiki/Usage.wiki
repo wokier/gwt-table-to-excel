@@ -16,7 +16,7 @@ You can define style for the following classes :
 }
 .gwt-table-to-excel-panel {
 }
-.gwt-table-to-excel-label {
+.gwt-table-to-excel-exportWidget {
 }
 }}}
 For exemple, it could be nice to put an excel icon in the export widget.
