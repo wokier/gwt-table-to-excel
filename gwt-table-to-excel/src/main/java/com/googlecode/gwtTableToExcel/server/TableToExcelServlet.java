@@ -17,7 +17,7 @@ import org.apache.commons.io.IOUtils;
  * </ servlet><br>
  * < servlet-mapping><br>
  *    < servlet-name>gwtTableToExcelServlet< /servlet-name><br>
- *    < url-pattern>/gtte/gtte< /url-pattern><br>
+ *    < url-pattern>/gtte/excel< /url-pattern><br>
  * < /servlet-mapping><br>
  * @author Francois Wauquier 'wokier'
  */
