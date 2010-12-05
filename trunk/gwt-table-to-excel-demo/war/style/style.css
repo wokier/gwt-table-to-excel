@@ -15,7 +15,7 @@
 .cellTable {
 	border: 1px solid #333333;
 }
-tr:nth-child(2n) {
+tr:nth-child(odd) {
 	background: #D0E4F6;
 }
 .invisible {

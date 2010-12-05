@@ -116,7 +116,7 @@
 		<dependency>
 			<groupId>com.googlecode.gwt-table-to-excel</groupId>
 			<artifactId>gwt-table-to-excel</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.1</version>
 		</dependency>
 
 
