@@ -22,8 +22,8 @@ Define the dependency in the dependencies section
 		</dependency>
 }}}
 ==== Without Maven ====
-gwt-table-to-excel-0.0.1.jar
-commons-io-1.4.jar
+ * gwt-table-to-excel-0.0.1.jar
+ * commons-io-1.4.jar
 
 == Add the module in your web.xml ==
 define in your .gwt.xml
