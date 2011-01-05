@@ -26,7 +26,7 @@ Define the dependency in the dependencies section
  * commons-io-1.4.jar
 
 == Add the module in your web.xml ==
-define in your .gwt.xml
+Define in your .gwt.xml
 {{{
 <inherits name="com.googlecode.gwtTableToExcel.gwtTableToExcel" />
 }}}
