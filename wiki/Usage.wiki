@@ -48,6 +48,13 @@ Define in your .gwt.xml
 {{{
 <iframe src="javascript:''" id="gwt-table-to-excel-target" tabIndex='-1' class="invisible"></iframe>
 }}}
+== Place the export widget ==
+{{{
+TableToExcelClient tableToExcelClient = new TableToExcelClient(myTable);
+myPanel.add(tableToExcelClient );
+}}}
+== Export ==
+Just export !
 == Custom the style ==
 You can define style for the following classes :
 {{{
