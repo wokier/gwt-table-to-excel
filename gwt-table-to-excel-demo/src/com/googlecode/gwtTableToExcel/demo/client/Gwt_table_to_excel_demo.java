@@ -85,7 +85,7 @@ public class Gwt_table_to_excel_demo implements EntryPoint {
 		FlexTable flexTable = new FlexTable();
 		flexTable.addStyleName("flexTable");
 		List<String> sentences = Arrays.asList("Here is another FlexTable","You can also use a button as export widget",
-				"And include it in the table itself if you want", "like this");
+				"And include it in the table itself if you want", "like this", "Et pour les français, il faut des caractères accentués");
 		fillaTableWithSentences(flexTable, sentences);
 
 		DecoratorPanel decoratorPanel = new DecoratorPanel();
@@ -108,7 +108,7 @@ public class Gwt_table_to_excel_demo implements EntryPoint {
 				return object;
 			}
 		},new TextHeader("Cool"));
-		List<String> sentences = Arrays.asList("It also works with the Cell Table","Relly, that works !", "Without any server-side rewrite" 
+		List<String> sentences = Arrays.asList("It also works with the Cell Table","Really, that works !", "Without any server-side rewrite" 
 				);
 		cellTable.setRowData(0,sentences);
 		
