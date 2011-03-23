@@ -52,6 +52,9 @@ public class TableToExcelServlet extends HttpServlet {
 	private void export(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String html = request.getParameter("html");
 		String fileName = request.getParameter("fileName");
+		if (fileName.endsWith(".xls")){
+			fileName = fileName+ ".xls";
+		}
 		response.setContentType("application/vnd.ms-excel");//magic is here
 		response.setHeader( "Content-Disposition", "attachment; filename=\""+fileName+"\"" );
 		response.setContentLength(html.length());
