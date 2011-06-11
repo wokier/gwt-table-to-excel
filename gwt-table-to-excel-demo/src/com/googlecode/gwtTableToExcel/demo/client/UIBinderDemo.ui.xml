@@ -1,0 +1,15 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:HTMLPanel>
+		<g:DecoratorPanel>
+			<g:FlexTable ui:field="exportFlexTable" styleName="flexTable" />
+		</g:DecoratorPanel>
+		<g:SimplePanel ui:field="exportPanel" />
+	</g:HTMLPanel>
+</ui:UiBinder> 

@@ -30,6 +30,8 @@ public class Gwt_table_to_excel_demo implements EntryPoint {
 	private final GreetingServiceAsync greetingService = GWT
 			.create(GreetingService.class);
 
+	RootPanel content = RootPanel.get("content");
+	
 	public void onModuleLoad() {
 		Scheduler.get().scheduleDeferred(new Command() {
 			public void execute() {
@@ -39,7 +41,7 @@ public class Gwt_table_to_excel_demo implements EntryPoint {
 	}
 
 	private void doModuleLoad() {
-		RootPanel.get("content").getElement().setInnerHTML("");
+		content.getElement().setInnerHTML("");
 		
 		buildFlexTableExample();
 		
@@ -47,6 +49,7 @@ public class Gwt_table_to_excel_demo implements EntryPoint {
 		
 		buildCellTableExample();
 		
+		buildUIBinderExample();
 	}
 
 	private void buildFlexTableExample() {
@@ -64,9 +67,9 @@ public class Gwt_table_to_excel_demo implements EntryPoint {
 		decoratorPanel.add(flexTable);
 		
 		TableToExcelClient tableToExcelClient = new TableToExcelClient(flexTable);
-		RootPanel.get("content").add(decoratorPanel);
-		RootPanel.get("content").add(tableToExcelClient.build());
-		RootPanel.get("content").add(new HTML("<br />"));
+		content.add(decoratorPanel);
+		content.add(tableToExcelClient.build());
+		content.add(new HTML("<br />"));
 	}
 
 	private void fillaTableWithSentences(FlexTable flexTable,
@@ -94,8 +97,8 @@ public class Gwt_table_to_excel_demo implements EntryPoint {
 		TableToExcelClient tableToExcelClient = new TableToExcelClient(flexTable, new Button("Export Button"));
 		flexTable.setWidget(3, 9, tableToExcelClient.build());
 		
-		RootPanel.get("content").add(decoratorPanel);
-		RootPanel.get("content").add(new HTML("<br />"));
+		content.add(decoratorPanel);
+		content.add(new HTML("<br />"));
 	}
 	
 	
@@ -116,11 +119,18 @@ public class Gwt_table_to_excel_demo implements EntryPoint {
 		decoratorPanel.add(cellTable);
 		
 		TableToExcelClient tableToExcelClient = new TableToExcelClient(cellTable);
-		RootPanel.get("content").add(decoratorPanel);
-		RootPanel.get("content").add(tableToExcelClient.build());
+		content.add(decoratorPanel);
+		content.add(tableToExcelClient.build());
 	}
 	
-	
+	private void buildUIBinderExample() {
+		UIBinderDemo uiBinder = new UIBinderDemo();
+		List<String> sentences = Arrays.asList("This table was built with UIBinder","It uses a SimplePanel to place the export widget");
+		fillaTableWithSentences(uiBinder.getExportFlexTable(), sentences);
+		content.add(uiBinder);
+		
+	}
+
 	
 	
 }

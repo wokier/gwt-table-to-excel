@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.googlecode.gwt-table-to-excel</groupId>
 	<artifactId>gwt-table-to-excel</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<description>GWT module to allow to export a table, without needing to write any server-side code</description>
 
 	<url>http://code.google.com/p/gwt-table-to-excel/</url>
