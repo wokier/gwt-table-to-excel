@@ -20,7 +20,10 @@
 	right: 0;
 	bottom : 0;
 }
-.flexTable , .flexTable td{
+table{
+	border-collapse: collapse;	
+}
+.flexTable, .flexTable td{
 	border: 1px solid #333333;
 }
 .cellTable {

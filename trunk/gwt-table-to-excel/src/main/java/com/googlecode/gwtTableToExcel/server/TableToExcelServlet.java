@@ -2,6 +2,7 @@ package com.googlecode.gwtTableToExcel.server;
 
 import java.io.IOException;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +25,8 @@ import org.apache.commons.io.IOUtils;
 @SuppressWarnings("serial")
 public class TableToExcelServlet extends HttpServlet {
 
+	private String encoding= "ISO-8859-1";
+
 	/**
 	 * Constructor
 	 */
@@ -39,6 +42,18 @@ public class TableToExcelServlet extends HttpServlet {
 		super.init();
 	}
 	
+	/**
+	 * see HttpServlet#init(ServletConfig)
+	 */
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		String initParameterEncoding = config.getInitParameter("encoding");
+		if(initParameterEncoding != null){
+			setEncoding(initParameterEncoding);
+		}
+	}
+	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		export(request, response);
@@ -52,13 +67,17 @@ public class TableToExcelServlet extends HttpServlet {
 	private void export(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String html = request.getParameter("html");
 		String fileName = request.getParameter("fileName");
-		if (fileName.endsWith(".xls")){
+		if (!fileName.endsWith(".xls")){
 			fileName = fileName+ ".xls";
 		}
 		response.setContentType("application/vnd.ms-excel");//magic is here
 		response.setHeader( "Content-Disposition", "attachment; filename=\""+fileName+"\"" );
 		response.setContentLength(html.length());
-		IOUtils.write(html, response.getOutputStream(),"ISO-8859-1");
+		IOUtils.write(html, response.getOutputStream(),encoding);
+	}
+	
+	public void setEncoding(String encoding) {
+		this.encoding = encoding;
 	}
 	
 }
