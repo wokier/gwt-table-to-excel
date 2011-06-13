@@ -43,6 +43,7 @@ Define in your .gwt.xml
 		<url-pattern>/YOUR_MODULE_NAME/excel</url-pattern>
 	</servlet-mapping>
 }}}
+Advanced users may have a look at [http://code.google.com/p/gwt-table-to-excel/wiki/EncodingIssues EncodingIssues]
 
 == Define an hidden frame in your original html page (used as download target)==
 {{{
