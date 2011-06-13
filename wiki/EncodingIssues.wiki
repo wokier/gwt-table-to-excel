@@ -24,6 +24,8 @@ web.xml
 = Servers =
 ||Server||Version||Encoding||
 ||AppEngine||*||ISO-8859-1(default)||
+||Jetty||6.1.10||ISO-8859-1||
 ||Tomcat||6.0.32||UTF-8||
+
 
 http://www.oracle.com/technetwork/java/download-139443.html
