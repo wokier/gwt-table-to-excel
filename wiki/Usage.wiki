@@ -18,11 +18,11 @@ Define the dependency in the dependencies section
 		<dependency>
 			<groupId>com.googlecode.gwt-table-to-excel</groupId>
 			<artifactId>gwt-table-to-excel</artifactId>
-			<version>0.0.1</version>
+			<version>0.0.3</version>
 		</dependency>
 }}}
 ==== Without Maven ====
- * gwt-table-to-excel-0.0.1.jar
+ * gwt-table-to-excel-0.0.3.jar
  * commons-io-1.4.jar
 
 == Add the module in your .gwt.xml ==
