@@ -10,7 +10,7 @@ But
 Since 0.0.2, you can define the encoding.
 
 = Configuration=
-web.xml
+== web.xml ==
 {{{
 <servlet>
 	<servlet-name>gwtTableToExcelServlet</servlet-name>
@@ -21,6 +21,11 @@ web.xml
 	</init-param>
 </servlet>
 }}}
+
+== Page ==
+You must configure your page in the same encoding, in the head section (and the html file itself)
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
 = Servers =
 ||Server||Version||Encoding||
 ||AppEngine||*||ISO-8859-1(default)||
