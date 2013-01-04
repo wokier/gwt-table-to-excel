@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.googlecode.gwt-table-to-excel</groupId>
 	<artifactId>gwt-table-to-excel-demo</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 	<packaging>war</packaging>
 	<name>gwt-table-to-excel Demo</name>
 
@@ -174,8 +174,11 @@
 		<dependency>
 			<groupId>com.googlecode.gwt-table-to-excel</groupId>
 			<artifactId>gwt-table-to-excel</artifactId>
-			<version>0.0.2</version>
+			<version>0.0.3</version>
 		</dependency>
+
+
+		<!-- gwt-visualization -->
 
 		<dependency>
 			<groupId>junit</groupId>

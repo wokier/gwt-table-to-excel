@@ -5,6 +5,8 @@
 	<inherits name="com.google.gwt.user.theme.standard.StandardResources" />
 	<inherits name="com.google.gwt.junit.JUnit" />
 
+	<inherits name='com.google.gwt.visualization.Visualization'/>
+
 	<inherits name="com.googlecode.gwtTableToExcel.gwtTableToExcel" />
 
 	<entry-point
