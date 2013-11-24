@@ -30,7 +30,9 @@ public class TableToExcelClient {
 	 * Simple Constructor
 	 * 
 	 * @param table
+	 * @deprecated use {@link TableToExcelClientBuilder}
 	 */
+	@Deprecated
 	public TableToExcelClient(final HTMLTable table) {
 		this(table, new Label("Export"), "export");
 	}
@@ -39,7 +41,9 @@ public class TableToExcelClient {
 	 * Simple Constructor
 	 * 
 	 * @param table
+	 * @deprecated use {@link TableToExcelClientBuilder}
 	 */
+	@Deprecated
 	@SuppressWarnings("rawtypes")
 	public TableToExcelClient(final CellTable table) {
 		this(table.getElement(), new Label("Export"), "export");
@@ -49,7 +53,9 @@ public class TableToExcelClient {
 	 * Simple Constructor
 	 * 
 	 * @param tableDomElement
+	 * @deprecated use {@link TableToExcelClientBuilder}
 	 */
+	@Deprecated
 	public TableToExcelClient(TableElement tableDomElement) {
 		this(tableDomElement, new Label("Export"), "export");
 	}
@@ -59,7 +65,9 @@ public class TableToExcelClient {
 	 * 
 	 * @param table
 	 * @param labelText
+	 * @deprecated use {@link TableToExcelClientBuilder}
 	 */
+	@Deprecated
 	public TableToExcelClient(final HTMLTable table, String labelText) {
 		this(table.getElement(), new Label(labelText), "export");
 	}
@@ -69,7 +77,9 @@ public class TableToExcelClient {
 	 * 
 	 * @param table
 	 * @param labelText
+	 * @deprecated use {@link TableToExcelClientBuilder}
 	 */
+	@Deprecated
 	@SuppressWarnings("rawtypes")
 	public TableToExcelClient(final CellTable table, String labelText) {
 		this(table.getElement(), new Label(labelText), "export");
@@ -80,7 +90,9 @@ public class TableToExcelClient {
 	 * 
 	 * @param tableElement
 	 * @param labelText
+	 * @deprecated use TableToExcelClientBuilder
 	 */
+	@Deprecated
 	public TableToExcelClient(final TableElement tableElement, String labelText) {
 		this(tableElement, new Label(labelText), "export");
 	}
@@ -91,10 +103,10 @@ public class TableToExcelClient {
 	 * @param table
 	 * @param labelText
 	 * @param fileName
-	 * @deprecated use {@link TableToExcelClient#TableToExcelClient(HTMLTable, Widget, String)} with
-	 *             Label as widget
+	 * @deprecated use {@link TableToExcelClient#TableToExcelClient(HTMLTable, Widget, String)} with Label as widget or {@link TableToExcelClientBuilder}
 	 */
-	public TableToExcelClient(final HTMLTable table, String labelText, String fileName) {
+	@Deprecated
+	protected TableToExcelClient(final HTMLTable table, String labelText, String fileName) {
 		this(table.getElement(), new Label(labelText), fileName);
 	}
 
@@ -104,12 +116,11 @@ public class TableToExcelClient {
 	 * @param table
 	 * @param labelText
 	 * @param fileName
-	 * @deprecated use {@link TableToExcelClient#TableToExcelClient(CellTable, Widget, String)} with
-	 *             Label as widget
+	 * @deprecated use {@link TableToExcelClient#TableToExcelClient(CellTable, Widget, String)} with Label as widget or {@link TableToExcelClientBuilder}
 	 */
 	@Deprecated
 	@SuppressWarnings("rawtypes")
-	public TableToExcelClient(final CellTable table, String labelText, String fileName) {
+	protected TableToExcelClient(final CellTable table, String labelText, String fileName) {
 		this(table.getElement(), new Label(labelText), fileName);
 	}
 
@@ -118,7 +129,9 @@ public class TableToExcelClient {
 	 * 
 	 * @param table
 	 * @param exportWidget
+	 * @deprecated use {@link TableToExcelClientBuilder}
 	 */
+	@Deprecated
 	public TableToExcelClient(final HTMLTable table, HasClickHandlers exportWidget) {
 		this(table.getElement(), (Widget) exportWidget, "export");
 	}
@@ -128,7 +141,9 @@ public class TableToExcelClient {
 	 * 
 	 * @param table
 	 * @param exportWidget
+	 * @deprecated use {@link TableToExcelClientBuilder}
 	 */
+	@Deprecated
 	@SuppressWarnings("rawtypes")
 	public TableToExcelClient(final CellTable table, HasClickHandlers exportWidget) {
 		this(table.getElement(), (Widget) exportWidget, "export");
@@ -139,7 +154,9 @@ public class TableToExcelClient {
 	 * 
 	 * @param tableElement
 	 * @param exportWidget
+	 * @deprecated use {@link TableToExcelClientBuilder}
 	 */
+	@Deprecated
 	public TableToExcelClient(final TableElement tableElement, HasClickHandlers exportWidget) {
 		this(tableElement, (Widget) exportWidget, "export");
 	}
@@ -150,7 +167,9 @@ public class TableToExcelClient {
 	 * @param table
 	 * @param labelText
 	 * @param fileName
+	 * @deprecated use {@link TableToExcelClientBuilder}
 	 */
+	@Deprecated
 	public TableToExcelClient(HTMLTable table, Widget exportWidget, String fileName) {
 		this(table.getElement(), exportWidget, fileName);
 	}
@@ -161,14 +180,15 @@ public class TableToExcelClient {
 	 * @param table
 	 * @param labelText
 	 * @param fileName
+	 * @deprecated use {@link TableToExcelClientBuilder}
 	 */
+	@Deprecated
 	@SuppressWarnings("rawtypes")
 	public TableToExcelClient(CellTable table, Widget exportWidget, String fileName) {
 		this(table.getElement(), exportWidget, fileName);
 	}
 
-	private TableToExcelClient(final com.google.gwt.dom.client.Element tableElement,
-			Widget exportWidget, String fileName) {
+	protected TableToExcelClient(final com.google.gwt.dom.client.Element tableElement, Widget exportWidget, String fileName) {
 		formPanel.setAction(GWT.getModuleBaseURL() + "excel");
 		// formPanel.setEncoding(FormPanel.ENCODING_MULTIPART);
 		formPanel.setMethod(FormPanel.METHOD_POST);
@@ -197,16 +217,28 @@ public class TableToExcelClient {
 	 * @return
 	 * @deprecated use {@link #getExportWidget()}
 	 */
-	public FormPanel build() {
+	@Deprecated
+	protected FormPanel build() {
 		return formPanel;
 	}
 
 	/**
-	 * Give the created form
+	 * Give the created form widget
+	 * 
+	 * @return
+	 * @deprecated use {@link #getExportFormWidget()}
+	 */
+	@Deprecated
+	public FormPanel getExportWidget() {
+		return formPanel;
+	}
+
+	/**
+	 * Give the created form widget
 	 * 
 	 * @return
 	 */
-	public FormPanel getExportWidget() {
+	public FormPanel getExportFormWidget() {
 		return formPanel;
 	}
 
