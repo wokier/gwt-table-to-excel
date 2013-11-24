@@ -6,25 +6,17 @@
 ==== With Maven ====
 Use [http://mojo.codehaus.org/gwt-maven-plugin/ gwt-maven-plugin]
 
-Define the repository in the repositories section
-{{{
-		<repository>
-			<id>gwt-table-to-excel-repository</id>
-			<name>gwt-table-to-excel Repository</name>
-			<url>http://gwt-table-to-excel.googlecode.com/svn/repository</url>
-		</repository>
-}}}
 Define the dependency in the dependencies section
 {{{
 		<dependency>
 			<groupId>com.googlecode.gwt-table-to-excel</groupId>
 			<artifactId>gwt-table-to-excel</artifactId>
-			<version>0.0.3</version>
+			<version>0.0.4</version>
 		</dependency>
 }}}
 ==== Without Maven ====
 Add the following jars into WEB-INF/lib
- * gwt-table-to-excel-0.0.3.jar
+ * gwt-table-to-excel-0.0.4.jar
  * commons-io-1.4.jar
 
 == Add the module in your .gwt.xml ==
