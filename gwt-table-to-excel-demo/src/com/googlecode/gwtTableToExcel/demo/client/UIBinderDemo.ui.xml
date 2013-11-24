@@ -11,5 +11,6 @@
 			<g:FlexTable ui:field="exportFlexTable" styleName="flexTable" />
 		</g:DecoratorPanel>
 		<g:SimplePanel ui:field="exportPanel" />
+		<g:FormPanel ui:field="exportForm" />
 	</g:HTMLPanel>
 </ui:UiBinder> 

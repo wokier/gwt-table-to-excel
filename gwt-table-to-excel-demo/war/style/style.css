@@ -1,19 +1,18 @@
 #container {
-	color: #333333;
+	color: #666666;
 	margin: 10px;	
 }
 #header {
 	background: url(../image/gwt-table-to-excel.png) top left no-repeat;
 	padding-left: 58px;
-	height: 48px;
+	padding-bottom: 10px;
+	margin-top:6px;
+	margin-left: 2px;
 	margin-bottom: 10px;
+	border-bottom: 3px solid #ebeff9;
 }
 #header * {
-	margin: 2px;
-	padding: 0;
-}
-#header h4 {
-	font-style: italic;	
+	margin: 0;
 }
 #footer {
 	position: absolute;
@@ -56,4 +55,8 @@ tr:nth-child(odd) {
 	border-radius: 4px;
 	min-width : 40px;
 	max-width : 100px;
+	color: white;
+}
+button.gwt-table-to-excel-exportWidget {
+	color: #666666;
 }

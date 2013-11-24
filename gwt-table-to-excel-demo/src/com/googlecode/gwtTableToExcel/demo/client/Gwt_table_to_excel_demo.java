@@ -5,11 +5,11 @@ import java.util.List;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.TableElement;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.cellview.client.TextHeader;
-import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Window;
@@ -26,17 +26,17 @@ import com.google.gwt.visualization.client.VisualizationUtils;
 import com.google.gwt.visualization.client.visualizations.PieChart;
 import com.google.gwt.visualization.client.visualizations.PieChart.Options;
 import com.google.gwt.visualization.client.visualizations.Table;
-import com.googlecode.gwtTableToExcel.client.TableToExcelClient;
+import com.googlecode.gwtTableToExcel.client.TableToExcelClientBuilder;
 
 /**
  * @see EntryPoint
  */
 public class Gwt_table_to_excel_demo implements EntryPoint {
 
-	RootPanel content = RootPanel.get("content");
+	RootPanel content;
 
 	public void onModuleLoad() {
-		Scheduler.get().scheduleDeferred(new Command() {
+		Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 			public void execute() {
 				doModuleLoad();
 			}
@@ -45,6 +45,8 @@ public class Gwt_table_to_excel_demo implements EntryPoint {
 	}
 
 	private void doModuleLoad() {
+		content = RootPanel.get("content");
+
 		content.getElement().setInnerHTML("");
 
 		buildFlexTableExample();
@@ -65,40 +67,33 @@ public class Gwt_table_to_excel_demo implements EntryPoint {
 				Table visualizationTable = new Table(createTable(), createTableOptions());
 				content.add(visualizationTable);
 				com.google.gwt.dom.client.TableElement tableElement = extractVisualizationTableElement(visualizationTable);
-				content.add(new TableToExcelClient(tableElement, "gwt-visualization")
-						.getExportWidget());
+				content.add(TableToExcelClientBuilder.fromTable(tableElement).toFileName("gwt-visualization").buildExportFormWidget());
 			}
 
 		}, PieChart.PACKAGE, Table.PACKAGE);
 	}
 
-	private com.google.gwt.dom.client.TableElement extractVisualizationTableElement(
-			Table visualizationTable) {
+	private com.google.gwt.dom.client.TableElement extractVisualizationTableElement(Table visualizationTable) {
 		if (!visualizationTable.isAttached()) {
 			Window.alert("Add your Visualization Table first");
 		}
-		com.google.gwt.dom.client.TableElement tableElement = (TableElement) TableElement
-				.as(visualizationTable.getElement().getElementsByTagName("table").getItem(0));
+		com.google.gwt.dom.client.TableElement tableElement = TableElement.as(visualizationTable.getElement().getElementsByTagName("table").getItem(0));
 		return tableElement;
 	}
 
 	private void buildFlexTableExample() {
 		FlexTable flexTable = new FlexTable();
 		flexTable.addStyleName("flexTable");
-		List<String> sentences = Arrays.asList("Here is a FlexTable",
-				"You can Export it in Excel!", "You can get some formatting contained in the html",
-				"But not those from the css");
+		List<String> sentences = Arrays.asList("Here is a FlexTable", "You can Export it in Excel!", "You can get some formatting contained in the html", "But not those from the css");
 		fillaTableWithSentences(flexTable, sentences);
-		DOM.setStyleAttribute((Element) flexTable.getWidget(2, 8).getElement().getParentNode(),
-				"background", "#016300");// green
-		((Element) flexTable.getWidget(3, 5).getElement().getParentNode()).addClassName("red");
+		DOM.setStyleAttribute((Element) flexTable.getWidget(2, 8).getElement().getParentNode(), "background", "#016300");// green
+		((Element) flexTable.getWidget(3, 5).getElement().getParentNode()).setClassName("red");
 
 		DecoratorPanel decoratorPanel = new DecoratorPanel();
 		decoratorPanel.add(flexTable);
 
-		TableToExcelClient tableToExcelClient = new TableToExcelClient(flexTable);
 		content.add(decoratorPanel);
-		content.add(tableToExcelClient.getExportWidget());
+		content.add(TableToExcelClientBuilder.fromTable(flexTable).buildExportFormWidget());
 		content.add(new HTML("<br />"));
 	}
 
@@ -116,18 +111,14 @@ public class Gwt_table_to_excel_demo implements EntryPoint {
 	private void buildFlexTableWithButtonExample() {
 		FlexTable flexTable = new FlexTable();
 		flexTable.addStyleName("flexTable");
-		List<String> sentences = Arrays.asList("Here is another FlexTable",
-				"You can also use a button as export widget",
-				"And include it in the table itself if you want", "like this",
+		List<String> sentences = Arrays.asList("Here is another FlexTable", "You can also use a button as export widget", "And include it in the table itself if you want", "like this",
 				"Et pour les français, il faut des caractères accentués");
 		fillaTableWithSentences(flexTable, sentences);
 
 		DecoratorPanel decoratorPanel = new DecoratorPanel();
 		decoratorPanel.add(flexTable);
 
-		TableToExcelClient tableToExcelClient = new TableToExcelClient(flexTable, new Button(
-				"Export Button"));
-		flexTable.setWidget(3, 9, tableToExcelClient.getExportWidget());
+		flexTable.setWidget(3, 9, TableToExcelClientBuilder.fromTable(flexTable).withWidget(new Button("Export Button")).buildExportFormWidget());
 
 		content.add(decoratorPanel);
 		content.add(new HTML("<br />"));
@@ -142,22 +133,20 @@ public class Gwt_table_to_excel_demo implements EntryPoint {
 				return object;
 			}
 		}, new TextHeader("Cool"));
-		List<String> sentences = Arrays.asList("It also works with the Cell Table",
-				"Really, that works !", "Without any server-side rewrite");
+		List<String> sentences = Arrays.asList("It also works with the Cell Table", "Really, that works !", "Without any server-side rewrite");
 		cellTable.setRowData(0, sentences);
 
 		DecoratorPanel decoratorPanel = new DecoratorPanel();
 		decoratorPanel.add(cellTable);
 
-		TableToExcelClient tableToExcelClient = new TableToExcelClient(cellTable);
 		content.add(decoratorPanel);
-		content.add(tableToExcelClient.getExportWidget());
+		content.add(TableToExcelClientBuilder.fromTable(cellTable).buildExportFormWidget());
+		content.add(new HTML("<br />"));
 	}
 
 	private void buildUIBinderExample() {
 		UIBinderDemo uiBinder = new UIBinderDemo();
-		List<String> sentences = Arrays.asList("This table was built with UIBinder",
-				"It uses a SimplePanel to place the export widget");
+		List<String> sentences = Arrays.asList("This table was built with UIBinder", "It uses a SimplePanel to place the export widget", "You can also provide it");
 		fillaTableWithSentences(uiBinder.getExportFlexTable(), sentences);
 		content.add(uiBinder);
 
@@ -169,14 +158,10 @@ public class Gwt_table_to_excel_demo implements EntryPoint {
 		data.addColumn(ColumnType.NUMBER, "Hours per Day");
 		data.addRows(2);
 		data.setValue(0, 0, "Work");
-		data.setValue(0, 1, 14);
+		data.setValue(0, 1, 16);
 		data.setValue(1, 0, "Sleep");
-		data.setValue(1, 1, 10);
+		data.setValue(1, 1, 8);
 		return data;
-		// DataView result = DataView.create(data);
-		// result.setColumns(new int[] { 0, 1 });
-		// return result;
-
 	}
 
 	private Options createPieChartOptions() {
@@ -189,8 +174,7 @@ public class Gwt_table_to_excel_demo implements EntryPoint {
 	}
 
 	private com.google.gwt.visualization.client.visualizations.Table.Options createTableOptions() {
-		com.google.gwt.visualization.client.visualizations.Table.Options options = com.google.gwt.visualization.client.visualizations.Table.Options
-				.create();
+		com.google.gwt.visualization.client.visualizations.Table.Options options = com.google.gwt.visualization.client.visualizations.Table.Options.create();
 		// options.setShowRowNumber(true);
 		return options;
 	}

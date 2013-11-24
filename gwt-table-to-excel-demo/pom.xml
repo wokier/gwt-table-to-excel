@@ -1,69 +1,57 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.googlecode.gwt-table-to-excel</groupId>
 	<artifactId>gwt-table-to-excel-demo</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.4</version>
 	<packaging>war</packaging>
 	<name>gwt-table-to-excel Demo</name>
 
 	<properties>
-		<gwtVersion>2.1.0</gwtVersion>
-		<maven.compiler.source>1.5</maven.compiler.source>
-		<maven.compiler.target>1.5</maven.compiler.target>
+		<gwtVersion>2.5.1</gwtVersion>
+		<maven.compiler.source>1.6</maven.compiler.source>
+		<maven.compiler.target>1.6</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-
-	<repositories>
-		<repository>
-			<id>gwt-table-to-excel-repository</id>
-			<name>gwt-table-to-excel Repository</name>
-			<url>http://gwt-table-to-excel.googlecode.com/svn/repository</url>
-		</repository>
-	</repositories>
 
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<testSourceDirectory>test</testSourceDirectory>
 		<outputDirectory>war/WEB-INF/classes</outputDirectory>
 
-		<resources>
-			<resource>
-				<directory>src</directory>
-				<includes>
-					<include>**/*.java</include>
-					<include>**/*.gwt.xml</include>
-				</includes>
-			</resource>
-			<resource>
-				<directory>resources</directory>
-				<includes>
-					<include>**/*.*</include>
-				</includes>
-			</resource>
-		</resources>
-
-		<testResources>
-			<testResource>
-				<directory>testResources</directory>
-				<includes>
-					<include>**/*.*</include>
-				</includes>
-			</testResource>
-		</testResources>
-
 		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<compilerVersion>1.6</compilerVersion>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.16</version>
+				<configuration>
+					<excludes>
+						<exclude>**/*GwtTest.java</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>gwt-maven-plugin</artifactId>
-				<version>2.1.0</version>
+				<version>${gwtVersion}</version>
 				<executions>
 					<execution>
 						<goals>
 							<goal>compile</goal>
 							<goal>test</goal>
-							<goal>generateAsync</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -72,63 +60,56 @@
 					<hostedWebapp>war</hostedWebapp>
 				</configuration>
 			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>2.1</version>
-				<executions>
-					<execution>
-						<phase>compile</phase>
-						<goals>
-							<goal>exploded</goal>
-						</goals>
-					</execution>
-				</executions>
+				<version>2.4</version>
 				<configuration>
-					<webappDirectory>war</webappDirectory>
+					<warSourceDirectory>war</warSourceDirectory>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.5</version>
-				<executions>
-					<execution>
-						<id>add-test-source</id>
-						<phase>generate-test-sources</phase>
-						<goals>
-							<goal>add-test-source</goal>
-						</goals>
-						<configuration>
-							<sources>
-								<source>src</source>
-								<source>test</source>
-							</sources>
-						</configuration>
-					</execution>
-
-				</executions>
 			</plugin>
 
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
-				<version>6.1.10</version>
+				<version>6.1.26</version>
 				<configuration>
 					<webAppSourceDirectory>war</webAppSourceDirectory>
 					<scanIntervalSeconds>10</scanIntervalSeconds>
-					<stopKey>foo</stopKey>
-					<stopPort>9999</stopPort>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>tomcat-maven-plugin</artifactId>
+				<version>1.1</version>
 				<configuration>
 					<warSourceDirectory>src</warSourceDirectory>
 					<warDirectory>war</warDirectory>
-<!--					<tomcatWebXml>war/WEB-INF/web.xml</tomcatWebXml>-->
-<!--					<path>/gwt-table-to-excel-demo</path>-->
+					<!-- <tomcatWebXml>war/WEB-INF/web.xml</tomcatWebXml> -->
+					<!-- <path>/gwt-table-to-excel-demo</path> -->
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>com.google.appengine</groupId>
+				<artifactId>appengine-maven-plugin</artifactId>
+				<version>1.8.5-maven3.0</version>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>war/gtte</directory>
+						</fileset>
+						<fileset>
+							<directory>war/WEB-INF/lib</directory>
+						</fileset>
+					</filesets>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -174,16 +155,17 @@
 		<dependency>
 			<groupId>com.googlecode.gwt-table-to-excel</groupId>
 			<artifactId>gwt-table-to-excel</artifactId>
-			<version>0.0.3</version>
+			<version>0.0.4</version>
 		</dependency>
-
-
-		<!-- gwt-visualization -->
-
+		<dependency>
+			<groupId>com.google.gwt.google-apis</groupId>
+			<artifactId>gwt-visualization</artifactId>
+			<version>1.0.2</version>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.7</version>
+			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

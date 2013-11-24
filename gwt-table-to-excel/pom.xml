@@ -1,12 +1,19 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
 	<groupId>com.googlecode.gwt-table-to-excel</groupId>
 	<artifactId>gwt-table-to-excel</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.4</version>
+	<packaging>jar</packaging>
+	<name>gwt-table-to-excel</name>
 	<description>GWT module to allow to export a table, without needing to write any server-side code</description>
 
 	<url>http://code.google.com/p/gwt-table-to-excel/</url>
+
 	<licenses>
 		<license>
 			<name>The Apache Software License, Version 2.0</name>
@@ -20,7 +27,6 @@
 	</properties>
 
 	<scm>
-		<!-- http://maven.apache.org/scm/subversion.html -->
 		<connection>
 			scm:svn:http://gwt-table-to-excel.googlecode.com/svn/trunk/gwt-table-to-excel
 		</connection>
@@ -31,10 +37,6 @@
 	</scm>
 
 	<distributionManagement>
-		<repository>
-			<id>gwt-table-to-excel-repository</id>
-			<url>svn:https://gwt-table-to-excel.googlecode.com/svn/repository</url>
-		</repository>
 		<site>
 			<id>gwt-table-to-excel-site</id>
 			<url>
@@ -77,14 +79,14 @@
 			<extension>
 				<groupId>org.jvnet.wagon-svn</groupId>
 				<artifactId>wagon-svn</artifactId>
-				<version>1.9</version>
+				<version>1.12</version>
 			</extension>
 		</extensions>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
+				<version>3.1</version>
 				<configuration>
 					<source>1.5</source>
 					<target>1.5</target>
@@ -92,10 +94,20 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>gwt-maven-plugin</artifactId>
+				<version>2.5.1</version>
+				<goals>
+					<goal>test</goal>
+				</goals>
+			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>2.1.2</version>
+				<version>2.2.1</version>
 				<executions>
 					<execution>
 						<phase>package</phase>
@@ -108,7 +120,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.7</version>
+				<version>2.9.1</version>
 				<executions>
 					<execution>
 						<phase>package</phase>
@@ -122,7 +134,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-<!-- 				<version>2.6</version> -->
+				<version>2.16</version>
 				<configuration>
 					<excludes>
 						<exclude>**/*GwtTest.java</exclude>
@@ -130,31 +142,39 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.5</version>
-				<executions>
-					<execution>
-						<id>add-source</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>add-source</goal>
-						</goals>
-						<configuration>
-							<sources>
-								<source>src/main/java</source>
-							</sources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
-<!-- 				<version>3.0-beta-3</version> -->
+				<version>3.3</version>
 				<configuration>
-				<outputDirectory>site/${project.version}</outputDirectory>
+					<outputDirectory>site/${project.version}</outputDirectory>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>site/${project.version}</directory>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
@@ -171,7 +191,7 @@
 					<reportSet>
 						<reports>
 							<report>index</report>
-<!--							<report>licence</report>-->
+							<!-- <report>licence</report> -->
 							<report>dependencies</report>
 							<report>plugin-management</report>
 							<report>plugins</report>
@@ -221,21 +241,20 @@
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>
-			<version>2.1.0</version>
+			<version>2.5.0</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>1.4</version>
+			<version>2.4</version>
 		</dependency>
-
 
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.7</version>
+			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
 
